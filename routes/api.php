@@ -27,3 +27,4 @@ Route::post('/class/store', [SclassController::class, 'store']);
 Route::get('/class/edit/{id}', [SclassController::class, 'edit']);
 Route::post('/class/update/{id}', [SclassController::class, 'update']);
 Route::delete('/class/delete/{id}', [SclassController::class, 'delete']);
+//End here
