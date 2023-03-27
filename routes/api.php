@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\SclassController;
+use App\Http\Controllers\Api\SubjectController;
 use App\Models\Sclass;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -28,3 +29,7 @@ Route::get('/class/edit/{id}', [SclassController::class, 'edit']);
 Route::post('/class/update/{id}', [SclassController::class, 'update']);
 Route::delete('/class/delete/{id}', [SclassController::class, 'delete']);
 //End here
+
+// Subject Class Route
+Route::get('/subject', [SubjectController::class, 'index']);
+Route::post('/subject/store', [SubjectController::class, 'store']);
