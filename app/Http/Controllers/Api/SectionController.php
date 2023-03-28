@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\Subject;
+use App\Models\Section;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
-class SubjectController extends Controller
+class SectionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +16,8 @@ class SubjectController extends Controller
      */
     public function index()
     {
-        $subject = Subject::join('sclasses', 'subjects.class_id', '=', 'sclasses.id')->get();
-        return response()->json($subject);
+        $section = Section::latest()->get();
+        return response()->json($section);
     }
 
     /**
@@ -29,17 +30,16 @@ class SubjectController extends Controller
     {
         $validateData = $request->validate([
             'class_id' => 'required',
-            'subject_name' => 'required|unique:subjects|max:25',
-            'subject_code' => 'required|unique:subjects|max:25'
+            'section_name' => 'required|unique:sections'
         ]);
 
-        Subject::insert([
+        Section::insert([
             'class_id' => $request->class_id,
-            'subject_name' => $request->subject_name,
-            'subject_code' => $request->subject_code,
+            'section_name' => $request->section_name,
+            'created_at' => Carbon::now()
         ]);
 
-        return response('Student Subject Inserted Successfully');
+        return response('Student Section Inserted Successfully');
     }
 
     /**
@@ -50,8 +50,8 @@ class SubjectController extends Controller
      */
     public function edit($id)
     {
-        $subject = Subject::findOrFail($id);
-        return response()->json($subject);
+        $section = Section::findOrFail($id);
+        return response()->json($section);
     }
 
     /**
@@ -63,14 +63,13 @@ class SubjectController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //return "hello";
-        $subject = Subject::findOrFail($id)->update([
+        $section = Section::findOrFail($id)->update([
             'class_id' => $request->class_id,
-            'subject_name' => $request->subject_name,
-            'subject_code' => $request->subject_code,
+            'section_name' => $request->section_name,
+            'created_at' => Carbon::now(),
         ]);
 
-        return response('Student Subject Update Successfully');
+        return response('Student Section Updated Successfully');
     }
 
     /**
@@ -81,8 +80,8 @@ class SubjectController extends Controller
      */
     public function destroy($id)
     {
-        $subject = Subject::findOrFail($id)->delete();
+        $section = Section::findOrFail($id)->delete();
 
-        return response('Student Subject deleted Successfully.');
+        return response('Student Section Deleted Successfully');
     }
 }
