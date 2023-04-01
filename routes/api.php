@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\SclassController;
 use App\Http\Controllers\Api\SectionController;
+use App\Http\Controllers\Api\StudentController;
 use App\Http\Controllers\Api\SubjectController;
 use App\Models\Sclass;
 use Illuminate\Http\Request;
@@ -45,3 +46,10 @@ Route::post('/section/store', [SectionController::class, 'store']);
 Route::get('/section/edit/{id}', [SectionController::class, 'edit']);
 Route::put('/section/update/{id}', [SectionController::class, 'update']);
 Route::delete('/section/delete/{id}', [SectionController::class, 'destroy']);
+
+// Student Class Route
+Route::get('/student', [StudentController::class, 'index']);
+Route::post('/student/store', [StudentController::class, 'store']);
+Route::get('/student/edit/{id}', [StudentController::class, 'edit']);
+Route::put('/student/update/{id}', [StudentController::class, 'update']);
+Route::delete('/student/delete/{id}', [StudentController::class, 'destroy']);
